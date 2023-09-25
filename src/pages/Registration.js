@@ -1,5 +1,5 @@
 import React from "react";
 
-export const Review = () => {
+export const Registration = () => {
   return <div>admin</div>;
 };
