@@ -1,5 +1,10 @@
 import React from "react";
+import Shop from "../components/Shop";
 
 export const Home = () => {
-  return <div>admin</div>;
+  return (
+    <>
+      <Shop mt={3} />
+    </>
+  );
 };

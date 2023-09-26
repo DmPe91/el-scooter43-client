@@ -2,8 +2,9 @@ import React from "react";
 import { Container, Form } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
 
-export const Registration = () => {
+export const Order = () => {
   return (
     <>
       <style type="text/css">
@@ -30,29 +31,33 @@ export const Registration = () => {
       >
         <Card style={{ width: 600 }} className="p-5">
           <h2 className="m-auto" style={{ color: "#2F4F4F" }}>
-            Регистрация
+            Заявка на ремонт
           </h2>
           <Form.Control
             className="mt-3"
-            placeholder="Введите ваш email..."
+            placeholder="Введите ваш телефон"
             style={{ color: "#2F4F4F" }}
           />
           <Form.Control
             className="mt-3"
-            placeholder="Введите ваше имя..."
+            placeholder="Введите ваш адрес(по желанию)"
             style={{ color: "#2F4F4F" }}
           />
           <Form.Control
             className="mt-3"
-            placeholder="Введите ваш пароль..."
-            type="password"
+            placeholder="Тема"
+            style={{ color: "#2F4F4F" }}
+          />
+          <Form.Control
+            className="mt-3"
+            placeholder="Описание"
             style={{ color: "#2F4F4F" }}
           />
           <Button
             variant={"outline-success"}
             className="mt-3 align-self-end button"
           >
-            Зарегестрироваться
+            Войдите
           </Button>
         </Card>
       </Container>
