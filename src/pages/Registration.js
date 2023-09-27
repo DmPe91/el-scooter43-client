@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Container, Form } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { registration } from "../http/authUserAPI";
+import { observer } from "mobx-react-lite";
+import { Context } from "..";
+import { useNavigate } from "react-router-dom";
 
-export const Registration = () => {
+export const Registration = observer(() => {
+  const { user } = useContext(Context);
+  const [email, setEmail] = useState(" ");
+  const [password, setPassword] = useState(" ");
+  const [name, setName] = useState("");
+  let navigate = useNavigate();
+  const click = async () => {
+    let data;
+    data = await registration(email, password, name);
+    console.log(data);
+    await user.setUser(data);
+    ///await user.setIsAuth(user.user.role);
+    navigate("/");
+  };
   return (
     <>
       <style type="text/css">
@@ -36,26 +53,33 @@ export const Registration = () => {
             className="mt-3"
             placeholder="Введите ваш email..."
             style={{ color: "#2F4F4F" }}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <Form.Control
             className="mt-3"
             placeholder="Введите ваше имя..."
             style={{ color: "#2F4F4F" }}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <Form.Control
             className="mt-3"
             placeholder="Введите ваш пароль..."
             type="password"
             style={{ color: "#2F4F4F" }}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Button
             variant={"outline-success"}
             className="mt-3 align-self-end button"
+            onClick={click}
           >
             Зарегестрироваться
-          </Button>
+          </Button>{" "}
         </Card>
       </Container>
     </>
   );
-};
+});

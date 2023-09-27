@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
@@ -12,6 +12,11 @@ import { Link } from "react-router-dom";
 
 const Header = observer(() => {
   const { user } = useContext(Context);
+  console.log(user.user);
+  const logout = () => {
+    user.setUser({});
+    user.setIsAuth("NO_USER");
+  };
   return (
     <>
       <style type="text/css">{`
@@ -103,7 +108,11 @@ const Header = observer(() => {
                       </Button>
                     </Link>
                     <Link>
-                      <Button variant={"outline-light"} className="button">
+                      <Button
+                        variant={"outline-light"}
+                        className="button"
+                        onClick={() => logout()}
+                      >
                         Выйти
                       </Button>
                     </Link>
@@ -116,7 +125,11 @@ const Header = observer(() => {
                       </Button>
                     </Link>
                     <Link>
-                      <Button variant={"outline-light"} className="button">
+                      <Button
+                        variant={"outline-light"}
+                        className="button"
+                        onClick={() => logout()}
+                      >
                         Выйти
                       </Button>
                     </Link>
