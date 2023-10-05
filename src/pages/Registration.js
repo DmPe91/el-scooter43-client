@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Container, Form } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { registration } from "../http/authUserAPI";
+import { registration, basket_user } from "../http/authUserAPI";
 import { observer } from "mobx-react-lite";
 import { Context } from "..";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,9 @@ export const Registration = observer(() => {
     data = await registration(email, password, name);
     console.log(data);
     await user.setUser(data);
-    ///await user.setIsAuth(user.user.role);
+    await user.setIsAuth(user.user.role);
+    let basket = await basket_user(user.user.id);
+    console.log(basket);
     navigate("/");
   };
   return (

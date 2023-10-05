@@ -6,25 +6,27 @@ export const registration = async (email, password, name) => {
     email,
     password,
     name,
-    role: "ADMIN",
+    role: "USER",
   });
-  let storedToken = localStorage.setItem("token", data.token);
-  if (storedToken) {
-    return jwt_decode(data.token);
-  }
+  localStorage.setItem("token", data.token);
+  return jwt_decode(data.token);
 };
 
 export const login = async (email, password) => {
   const { data } = await $host.post("api/user/login", { email, password });
-  let storedToken = localStorage.setItem("token", data.token);
-  if (storedToken) {
-    return jwt_decode(data.token);
-  }
+  localStorage.setItem("token", data.token);
+
+  return jwt_decode(data.token);
 };
 
 export const check = async () => {
   const { data } = await $authHost.get("api/user/auth");
-  let storedToken = localStorage.setItem("token", data.token);
+  localStorage.setItem("token", data.token);
 
   return jwt_decode(data.token);
+};
+
+export const basket_user = async (id) => {
+  const { data } = await $host.get("api/basket/" + id);
+  return data;
 };

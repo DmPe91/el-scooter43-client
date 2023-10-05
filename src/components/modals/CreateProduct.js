@@ -41,16 +41,18 @@ const CreateProduct = observer(({ show, onHide }) => {
 
   const selectFile = (e) => {
     setFile(e.target.files[0]);
+    console.log(file);
   };
 
   const addDevice = () => {
     const formData = new FormData();
     formData.append("name", name);
-    formData.append("price", `${price}`);
+    formData.append("price", price);
     formData.append("img", file);
-    formData.append("brandId", product.selectedCondition.id);
+    formData.append("conditionId", product.selectedCondition.id);
     formData.append("typeId", product.selectedType.id);
     formData.append("info", JSON.stringify(info));
+    console.log(file, name, `${price}`, formData);
     createProduct(formData).then((data) => onHide());
   };
 

@@ -3,7 +3,7 @@ import { Container, Form } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
-import { login } from "../http/authUserAPI";
+import { login, basket_user } from "../http/authUserAPI";
 import { observer } from "mobx-react-lite";
 import { Context } from "..";
 import { useNavigate } from "react-router-dom";
@@ -14,11 +14,12 @@ export const Login = observer(() => {
   const [password, setPassword] = useState(" ");
   let navigate = useNavigate();
   const click = async () => {
-    let data;
+    let data, basket;
     data = await login(email, password);
-
     user.setUser(data);
-    user.setIsAuth(user.role);
+    user.setIsAuth(data.role);
+    basket = await basket_user(data.id);
+    user.setBasket(basket);
     navigate("/");
   };
   return (

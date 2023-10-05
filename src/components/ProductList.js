@@ -7,7 +7,7 @@ import { Context } from "..";
 
 const ProductList = observer(() => {
   const { product } = useContext(Context);
-  console.log(product);
+
   return (
     <Row className="d-flex">
       {product.product.map((prod) => (

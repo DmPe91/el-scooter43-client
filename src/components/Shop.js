@@ -6,14 +6,29 @@ import { Context } from "..";
 import { Col, Container, Row } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { fetchTypes, fetchCondition, fetchProducts } from "../http/productAPI";
+import Pages from "./Pagination";
 
 const Shop = observer(() => {
   const { product } = useContext(Context);
   useEffect(() => {
     fetchTypes().then((data) => product.setTypes(data));
     fetchCondition().then((data) => product.setCondition(data));
-    fetchProducts().then((data) => product.setProduct(data.rows));
+    fetchProducts(null, null, 1, 3).then((data) => {
+      product.setProduct(data.rows);
+      product.setTotalCount(data.count);
+    });
   }, []);
+  useEffect(() => {
+    fetchProducts(
+      product.selectedType.id,
+      product.selectedCondition.id,
+      product.page,
+      5
+    ).then((data) => {
+      product.setProduct(data.rows);
+      product.setTotalCount(data.count);
+    });
+  }, [product.page, product.selectedType, product.selectedCondition]);
   return (
     <Container>
       <Row className="mt-2">
@@ -23,6 +38,7 @@ const Shop = observer(() => {
         <Col md={9}>
           <ConditionBar />
           <ProductList />
+          <Pages />
         </Col>
       </Row>
     </Container>

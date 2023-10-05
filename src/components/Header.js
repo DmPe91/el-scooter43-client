@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const Header = observer(() => {
   const { user } = useContext(Context);
-  console.log(user.user);
+
   const logout = () => {
     user.setUser({});
     user.setIsAuth("NO_USER");

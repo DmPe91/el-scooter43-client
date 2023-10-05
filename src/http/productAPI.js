@@ -22,13 +22,20 @@ export const fetchCondition = async () => {
 };
 
 export const createProduct = async (product) => {
-  const { data } = await $authHost.post("api/product", product);
+  const { data } = await $authHost.post("api/product/add", product);
 
   return data;
 };
 
-export const fetchProducts = async () => {
-  const { data } = await $host.get("api/product");
+export const fetchProducts = async (typeId, conditionId, page, limit = 6) => {
+  const { data } = await $host.get("api/product", {
+    params: {
+      typeId,
+      conditionId,
+      page,
+      limit,
+    },
+  });
   return data;
 };
 
