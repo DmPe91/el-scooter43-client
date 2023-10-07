@@ -10,6 +10,7 @@ export default class ProductStore {
     this._page = 1;
     this._totalCount = 0;
     this._limit = 6;
+
     makeAutoObservable(this);
   }
 
@@ -34,6 +35,7 @@ export default class ProductStore {
   setTotalCount(count) {
     this._totalCount = count;
   }
+
   get types() {
     return this._types;
   }

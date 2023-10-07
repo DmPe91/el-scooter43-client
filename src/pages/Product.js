@@ -4,14 +4,26 @@ import { useParams } from "react-router-dom";
 import { Context } from "../index";
 import { observer } from "mobx-react-lite";
 import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
+import { add_basket_product } from "../http/authUserAPI";
+import { useNavigate } from "react-router-dom";
 
 export const Product = observer(() => {
   const [device, setDevice] = useState({ info: [] });
-  const { product } = useContext(Context);
+  const { product, user } = useContext(Context);
   let { id } = useParams();
   useEffect(() => {
     fetchProduct(id).then((data) => setDevice(data));
   }, []);
+
+  const navigate = useNavigate();
+  const click = async () => {
+    if (user.isAuth === "NO_USER") {
+      navigate("/registration");
+    } else {
+      let data;
+      data = await add_basket_product(user.basket.id, device.id);
+    }
+  };
 
   return (
     <Container className="mt-3">
@@ -39,7 +51,9 @@ export const Product = observer(() => {
             }}
           >
             <h3>От: {device.price} руб.</h3>
-            <Button variant={"outline-dark"}>Добавить в корзину</Button>
+            <Button variant={"outline-dark"} onClick={click}>
+              Добавить в корзину
+            </Button>
           </Card>
         </Col>
       </Row>

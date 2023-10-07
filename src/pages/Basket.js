@@ -1,31 +1,29 @@
 import React, { useContext, useState } from "react";
-
+import BasketBar from "../components/BasketBar";
 import Row from "react-bootstrap/Row";
 import { Card, Col, Container, Image, Button } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { Context } from "..";
 
 export const Basket = observer(() => {
+  const { user, product } = useContext(Context);
   const [price, setPrice] = useState(Number);
-  const { product } = useContext(Context);
+  let res = 0;
+  user.basket.basketproduct.forEach((el) => {
+    for (let i = 0; i < product.product.length; i++) {
+      if (el.productId === product.product[i].id) {
+        res = res + product.product[i].price;
+      }
+    }
+  });
   return (
     <Container>
-      {product.product.map((prod) => (
-        <Card>
-          <Row key={prod.id}>
-            <Col>
-              <Image width={150} height={150} src={prod.img}></Image>
-            </Col>
-            <Col>{prod.name}</Col>
-            <Col>{prod.price}</Col>
-            <Col>
-              <Button>Удалить</Button>
-            </Col>
-          </Row>
-        </Card>
+      {user.basket.basketproduct.map((el) => (
+        <BasketBar key={el.id} device={el} />
       ))}
+
       <Row>
-        <Col>{}</Col>
+        <Col>{res} рублей</Col>
       </Row>
     </Container>
   );

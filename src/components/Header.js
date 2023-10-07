@@ -16,6 +16,7 @@ const Header = observer(() => {
   const logout = () => {
     user.setUser({});
     user.setIsAuth("NO_USER");
+    localStorage.removeItem("token");
   };
   return (
     <>
@@ -121,7 +122,10 @@ const Header = observer(() => {
                   <Nav>
                     <Link to="/basket">
                       <Button variant={"outline-light"} className="button">
-                        Корзина
+                        Корзина{" "}
+                        {user.basket.basketproduct.length > 0
+                          ? user.basket.basketproduct.length
+                          : " "}
                       </Button>
                     </Link>
                     <Link>

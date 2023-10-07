@@ -14,13 +14,13 @@ export const Registration = observer(() => {
   const [name, setName] = useState("");
   let navigate = useNavigate();
   const click = async () => {
-    let data;
+    let data, basket;
     data = await registration(email, password, name);
-    console.log(data);
-    await user.setUser(data);
-    await user.setIsAuth(user.user.role);
-    let basket = await basket_user(user.user.id);
-    console.log(basket);
+    user.setUser(data);
+
+    user.setIsAuth(data.role);
+    basket = await basket_user(data.id);
+    user.setBasket(basket);
     navigate("/");
   };
   return (

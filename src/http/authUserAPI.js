@@ -9,6 +9,7 @@ export const registration = async (email, password, name) => {
     role: "USER",
   });
   localStorage.setItem("token", data.token);
+
   return jwt_decode(data.token);
 };
 
@@ -29,4 +30,10 @@ export const check = async () => {
 export const basket_user = async (id) => {
   const { data } = await $host.get("api/basket/" + id);
   return data;
+};
+
+export const add_basket_product = async (basketId, productId) => {
+  const { data } = await $host.post(
+    "api/basket/" + basketId + "/product/" + productId
+  );
 };
