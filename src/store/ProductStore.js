@@ -10,7 +10,7 @@ export default class ProductStore {
     this._page = 1;
     this._totalCount = 0;
     this._limit = 6;
-
+    this._totalSum = 0;
     makeAutoObservable(this);
   }
 
@@ -34,6 +34,10 @@ export default class ProductStore {
   }
   setTotalCount(count) {
     this._totalCount = count;
+  }
+
+  setTotalSum(sum) {
+    this._totalSum = sum;
   }
 
   get types() {
@@ -61,5 +65,8 @@ export default class ProductStore {
   }
   get limit() {
     return this._limit;
+  }
+  get totalSum() {
+    return this._totalSum;
   }
 }

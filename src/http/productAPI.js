@@ -43,3 +43,7 @@ export const fetchProduct = async (id) => {
   const { data } = await $host.get("api/product/" + id);
   return data;
 };
+
+export const delete_product = async (id) => {
+  const { data } = await $host.delete("api/product/" + id);
+};

@@ -5,18 +5,20 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { Context } from "..";
-import { add_basket_product } from "../http/authUserAPI";
+import { add_basket_product, basket_user } from "../http/authUserAPI";
 import { useNavigate } from "react-router-dom";
 
-const ProductItem = observer(({ product }) => {
-  const { user } = useContext(Context);
+const ProductItem = observer(({ prod }) => {
+  const { user, product } = useContext(Context);
   const navigate = useNavigate();
   const click = async () => {
     if (user.isAuth === "NO_USER") {
       navigate("/registration");
     } else {
-      let data;
-      data = await add_basket_product(user.basket.id, product.id);
+      await add_basket_product(user.basket.id, prod.id);
+      let basket = await basket_user(user.user.id);
+      user.setBasket(basket);
+      product.setTotalSum(product.totalSum + prod.price);
     }
   };
   return (
@@ -25,11 +27,11 @@ const ProductItem = observer(({ product }) => {
         <Image
           width={150}
           height={150}
-          src={process.env.REACT_APP_API_URL + product.img}
+          src={process.env.REACT_APP_API_URL + prod.img}
         />
-        <div>{product.name} </div>
-        <div>{product.price} рублей</div>
-        <Link to={"/product" + "/" + product.id}>
+        <div>{prod.name} </div>
+        <div>{prod.price} рублей</div>
+        <Link to={"/product" + "/" + prod.id}>
           <Button>Узнать больше</Button>
         </Link>
         <Button onClick={click}>Купить</Button>

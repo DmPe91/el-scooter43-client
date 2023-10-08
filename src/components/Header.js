@@ -11,7 +11,7 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
 const Header = observer(() => {
-  const { user } = useContext(Context);
+  const { user, product } = useContext(Context);
 
   const logout = () => {
     user.setUser({});
@@ -122,10 +122,7 @@ const Header = observer(() => {
                   <Nav>
                     <Link to="/basket">
                       <Button variant={"outline-light"} className="button">
-                        Корзина{" "}
-                        {user.basket.basketproduct.length > 0
-                          ? user.basket.basketproduct.length
-                          : " "}
+                        Корзина {product.totalSum} рублей
                       </Button>
                     </Link>
                     <Link>

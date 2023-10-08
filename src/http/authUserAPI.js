@@ -32,8 +32,59 @@ export const basket_user = async (id) => {
   return data;
 };
 
+export const baskets = async () => {
+  const { data } = await $host.get("api/basket/");
+  return data;
+};
+
+export const delete_basket = async (id) => {
+  const { data } = await $host.delete("api/basket/" + id);
+};
+
 export const add_basket_product = async (basketId, productId) => {
   const { data } = await $host.post(
     "api/basket/" + basketId + "/product/" + productId
   );
+};
+
+export const delete_basket_product = async (id) => {
+  const { data } = await $host.delete("api/basket/" + id);
+};
+
+export const create_order = async (cause, place, contact, description) => {
+  const { data } = await $host.post("api/order/", {
+    cause,
+    place,
+    contact,
+    description,
+  });
+};
+
+export const create_review = async (cause, description) => {
+  const { data } = await $host.post("api/review/", {
+    cause,
+    description,
+  });
+};
+
+export const moderation_review = async (id) => {
+  const { data } = await $host.patch("api/review/" + id);
+};
+
+export const reviews = async () => {
+  const { data } = await $host.get("api/review/");
+  return data;
+};
+
+export const orders = async () => {
+  const { data } = await $host.get("api/order/");
+  return data;
+};
+
+export const delete_order = async (id) => {
+  const { data } = await $host.delete("api/order/" + id);
+};
+
+export const delete_review = async (id) => {
+  const { data } = await $host.delete("api/review/" + id);
 };

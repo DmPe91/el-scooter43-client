@@ -1,10 +1,23 @@
-import React from "react";
 import { Container, Form } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
+import { observer } from "mobx-react-lite";
+import React, { useState, useContext } from "react";
+import { Context } from "..";
+import { create_review } from "../http/authUserAPI";
+import { useNavigate } from "react-router-dom";
 
-export const Review = () => {
+export const Review = observer(() => {
+  const { user, product } = useContext(Context);
+  const [cause, setCause] = useState(" ");
+  const [description, setDescription] = useState(" ");
+  let navigate = useNavigate();
+  const click = async () => {
+    await create_review(cause, description);
+    navigate("/");
+    alert("Ваша отзыв успешно отправлен.После модерации, он будет опубликован");
+  };
   return (
     <>
       <style type="text/css">
@@ -37,21 +50,30 @@ export const Review = () => {
             className="mt-3"
             placeholder="Введите ваше имя"
             style={{ color: "#2F4F4F" }}
+            value={cause}
+            onChange={(e) => {
+              setCause(e.target.value);
+            }}
           />
           <Form.Control
             className="mt-3"
             placeholder="Отзыв"
             style={{ color: "#2F4F4F" }}
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
           />
 
           <Button
             variant={"outline-success"}
             className="mt-3 align-self-end button"
+            onClick={click}
           >
-            Войдите
+            Отправить отзыв
           </Button>
         </Card>
       </Container>
     </>
   );
-};
+});

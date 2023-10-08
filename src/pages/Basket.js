@@ -1,29 +1,24 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BasketBar from "../components/BasketBar";
 import Row from "react-bootstrap/Row";
 import { Card, Col, Container, Image, Button } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { Context } from "..";
+import { fetchProducts } from "../http/productAPI";
+import { check, basket_user, delete_basket_product } from "../http/authUserAPI";
+import { Spinner } from "react-bootstrap";
 
 export const Basket = observer(() => {
   const { user, product } = useContext(Context);
-  const [price, setPrice] = useState(Number);
-  let res = 0;
-  user.basket.basketproduct.forEach((el) => {
-    for (let i = 0; i < product.product.length; i++) {
-      if (el.productId === product.product[i].id) {
-        res = res + product.product[i].price;
-      }
-    }
-  });
+
   return (
     <Container>
-      {user.basket.basketproduct.map((el) => (
+      {user.basket.basketproduct?.map((el) => (
         <BasketBar key={el.id} device={el} />
       ))}
 
       <Row>
-        <Col>{res} рублей</Col>
+        <Col>{product.totalSum} рублей</Col>
       </Row>
     </Container>
   );

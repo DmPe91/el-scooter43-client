@@ -3,30 +3,34 @@ import Row from "react-bootstrap/Row";
 import { Card, Col, Container, Image, Button } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { Context } from "..";
+import { delete_basket_product, basket_user } from "../http/authUserAPI";
 
 const BasketBar = observer(({ device }) => {
-  const { product } = useContext(Context);
-  let res;
-  device = product.product.forEach((el) => {
-    if (el.id === device.productId) {
-      res = el;
-    }
-  });
-  console.log(res);
+  const { product, user } = useContext(Context);
+
+  const click = async () => {
+    await delete_basket_product(device.id).then(() => {
+      basket_user(user.user.id).then((data) => {
+        user.setBasket(data);
+      });
+    });
+    product.setTotalSum(product.totalSum - device.price);
+  };
+
   return (
     <Card>
-      <Row key={res.id}>
+      <Row key={device.id}>
         <Col>
           <Image
             width={150}
             height={150}
-            src={process.env.REACT_APP_API_URL + res.img}
+            src={process.env.REACT_APP_API_URL + device.img}
           ></Image>
         </Col>
-        <Col>{res.name}</Col>
-        <Col>{res.price}</Col>
+        <Col>{device.name}</Col>
+        <Col>{device.price}</Col>
         <Col>
-          <Button>Удалить</Button>
+          <Button onClick={click}>Удалить</Button>
         </Col>
       </Row>
     </Card>
