@@ -7,6 +7,12 @@ import { observer } from "mobx-react-lite";
 import { Context } from "..";
 import { add_basket_product, basket_user } from "../http/authUserAPI";
 import { useNavigate } from "react-router-dom";
+import {
+  fetchTypes,
+  fetchCondition,
+  fetchProducts,
+  delete_product,
+} from "../http/productAPI";
 
 const ProductItem = observer(({ prod }) => {
   const { user, product } = useContext(Context);
@@ -20,6 +26,16 @@ const ProductItem = observer(({ prod }) => {
       user.setBasket(basket);
       product.setTotalSum(product.totalSum + prod.price);
     }
+  };
+  const delete_device = async () => {
+    delete_product(prod.id).then(() => {
+      fetchTypes().then((data) => product.setTypes(data));
+      fetchCondition().then((data) => product.setCondition(data));
+      fetchProducts(null, null, 1, 3).then((data) => {
+        product.setProduct(data.rows);
+        product.setTotalCount(data.count);
+      });
+    });
   };
   return (
     <Col md={3} className={"mt-3"}>
@@ -35,6 +51,9 @@ const ProductItem = observer(({ prod }) => {
           <Button>Узнать больше</Button>
         </Link>
         <Button onClick={click}>Купить</Button>
+        {user.isAuth === "ADMIN" && (
+          <Button onClick={delete_device}>Удалить товар</Button>
+        )}
       </Card>
     </Col>
   );

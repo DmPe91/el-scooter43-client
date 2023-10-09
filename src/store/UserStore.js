@@ -7,6 +7,9 @@ export default class UserStore {
     this._basket = {};
     this._order = [];
     this._review = [];
+    this._baskets = [];
+    this._orders = [];
+    this._reviews = [];
     makeAutoObservable(this);
   }
 
@@ -25,6 +28,15 @@ export default class UserStore {
   setReview(review) {
     this._review = review;
   }
+  setBaskets(baskets) {
+    this._baskets = baskets;
+  }
+  setOrders(orders) {
+    this._orders = orders;
+  }
+  setReviews(reviews) {
+    this._reviews = reviews;
+  }
 
   get isAuth() {
     return this._isAuth;
@@ -40,5 +52,14 @@ export default class UserStore {
   }
   get review() {
     return this._review;
+  }
+  get baskets() {
+    return this._baskets;
+  }
+  get orders() {
+    return this._orders;
+  }
+  get reviews() {
+    return this._reviews;
   }
 }

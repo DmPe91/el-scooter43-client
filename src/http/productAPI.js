@@ -11,6 +11,10 @@ export const fetchTypes = async () => {
   return data;
 };
 
+export const delete_type = async (id) => {
+  const { data } = await $host.delete("api/type/" + id);
+};
+
 export const createCondition = async (condition) => {
   const { data } = await $authHost.post("api/condition", condition);
   return data;
