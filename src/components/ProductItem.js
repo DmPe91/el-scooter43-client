@@ -48,11 +48,25 @@ const ProductItem = observer(({ prod }) => {
         <div>{prod.name} </div>
         <div>{prod.price} рублей</div>
         <Link to={"/product" + "/" + prod.id}>
-          <Button>Узнать больше</Button>
+          <Button className={"mt-2"} style={{ background: "#2F4F4F" }}>
+            Узнать больше
+          </Button>
         </Link>
-        <Button onClick={click}>Купить</Button>
+        <Button
+          onClick={click}
+          className={"mt-2"}
+          style={{ background: "#2F4F4F" }}
+        >
+          Купить
+        </Button>
         {user.isAuth === "ADMIN" && (
-          <Button onClick={delete_device}>Удалить товар</Button>
+          <Button
+            onClick={delete_device}
+            className={"mt-2"}
+            style={{ background: "#2F4F4F" }}
+          >
+            Удалить товар
+          </Button>
         )}
       </Card>
     </Col>

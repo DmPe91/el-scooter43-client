@@ -9,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 export const Registration = observer(() => {
   const { user } = useContext(Context);
-  const [email, setEmail] = useState(" ");
-  const [password, setPassword] = useState(" ");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   let navigate = useNavigate();
   const click = async () => {
@@ -79,7 +79,7 @@ export const Registration = observer(() => {
             onClick={click}
           >
             Зарегестрироваться
-          </Button>{" "}
+          </Button>
         </Card>
       </Container>
     </>

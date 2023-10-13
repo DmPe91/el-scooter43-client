@@ -10,10 +10,10 @@ import { useNavigate } from "react-router-dom";
 
 export const Order = observer(() => {
   const { user, product } = useContext(Context);
-  const [cause, setCause] = useState(" ");
-  const [contact, setContact] = useState(" ");
-  const [place, setPlace] = useState(" ");
-  const [description, setDescription] = useState(" ");
+  const [cause, setCause] = useState("");
+  const [contact, setContact] = useState("");
+  const [place, setPlace] = useState("");
+  const [description, setDescription] = useState("");
   let navigate = useNavigate();
   const click = async () => {
     await create_order(cause, contact, place, description);

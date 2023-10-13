@@ -15,7 +15,7 @@ const ConditionBar = observer(() => {
           style={{ margin: "5px", textAlign: "center" }}
           onClick={() => product.setSelectedCondition(condition)}
           border={
-            condition.id === product.selectedCondition.id ? "danger" : "light"
+            condition.id === product.selectedCondition.id ? "dark" : "light"
           }
         >
           {condition.name}

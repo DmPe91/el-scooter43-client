@@ -122,7 +122,7 @@ const CreateProduct = observer(({ show, onHide }) => {
                   placeholder="введите название свойства"
                   value={i.title}
                   onChange={(e) =>
-                    changeInfo("title", e.target.value, i.number)
+                    changeInfo("tittle", e.target.value, i.number)
                   }
                 />
               </Col>

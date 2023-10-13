@@ -24,7 +24,7 @@ export const Product = observer(() => {
       data = await add_basket_product(user.basket.id, device.id);
     }
   };
-
+  console.log(device);
   return (
     <Container className="mt-3">
       <Row>
@@ -67,7 +67,7 @@ export const Product = observer(() => {
               padding: 10,
             }}
           >
-            {info.title}: {info.description}
+            {info.tittle}: {info.description}
           </Row>
         ))}
       </Row>

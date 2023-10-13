@@ -79,9 +79,16 @@ export const Admin = observer(() => {
                     <Col>{bp.price}</Col>
                   </Row>
                 ))}
-                <Button onClick={() => click_deletebasket(basket.id)}>
-                  Удалить заказ
-                </Button>
+                {basket.basketproduct.length > 0 ? (
+                  <Button
+                    onClick={() => click_deletebasket(basket.id)}
+                    style={{ background: "#2F4F4F" }}
+                  >
+                    Удалить заказ
+                  </Button>
+                ) : (
+                  " "
+                )}
               </Row>
             ))}
           </Accordion.Body>
@@ -97,7 +104,10 @@ export const Admin = observer(() => {
                   {review.moderation === true ? (
                     "Опубликовано"
                   ) : (
-                    <Button onClick={() => click_moderation(review.id)}>
+                    <Button
+                      onClick={() => click_moderation(review.id)}
+                      style={{ background: "#2F4F4F" }}
+                    >
                       Опубликовать
                     </Button>
                   )}
@@ -107,6 +117,8 @@ export const Admin = observer(() => {
                     onClick={() => {
                       click_deletereview(review.id);
                     }}
+                    style={{ background: "#2F4F4F" }}
+                    className="mt-2"
                   >
                     Удалить отзыв
                   </Button>
@@ -125,7 +137,11 @@ export const Admin = observer(() => {
                 <Col>{order.place}</Col>
                 <Col>{order.contact}</Col>
                 <Col>
-                  <Button onClick={() => click_deleteorder(order.id)}>
+                  <Button
+                    onClick={() => click_deleteorder(order.id)}
+                    style={{ background: "#2F4F4F" }}
+                    className="mt-2"
+                  >
                     Удалить заявку
                   </Button>
                 </Col>
@@ -140,7 +156,11 @@ export const Admin = observer(() => {
               <Row key={type.id}>
                 <Col>{type.name}</Col>
                 <Col>
-                  <Button onClick={() => click_deletetype(type.id)}>
+                  <Button
+                    onClick={() => click_deletetype(type.id)}
+                    style={{ background: "#2F4F4F" }}
+                    className="mt-2"
+                  >
                     Удалить тип
                   </Button>
                 </Col>
@@ -152,10 +172,19 @@ export const Admin = observer(() => {
         <Accordion.Item eventKey="4">
           <Accordion.Header>Добавить товар и тип</Accordion.Header>
           <Accordion.Body>
-            <Button onClick={() => setProductVisisble(true)}>
+            <Button
+              onClick={() => setProductVisisble(true)}
+              style={{ background: "#2F4F4F" }}
+              className="m-2"
+            >
               Добавить товар
             </Button>
-            <Button onClick={() => setTypeVisisble(true)}>Добавить тип</Button>
+            <Button
+              onClick={() => setTypeVisisble(true)}
+              style={{ background: "#2F4F4F" }}
+            >
+              Добавить тип
+            </Button>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>

@@ -8,18 +8,28 @@ const TypeBar = observer(() => {
   const { product } = useContext(Context);
 
   return (
-    <ListGroup>
-      {product.types.map((type) => (
-        <ListGroup.Item
-          active={type.id === product.selectedType.id}
-          style={{ cursor: "pointer" }}
-          key={type.id}
-          onClick={() => product.setSelectedType(type)}
-        >
-          {type.name}
-        </ListGroup.Item>
-      ))}
-    </ListGroup>
+    <>
+      <style type="text/css">{`
+       .list-group-item {
+        background: #2F4F4F;
+       color: white !important;
+       }
+      
+      }`}</style>
+      <ListGroup>
+        {product.types.map((type) => (
+          <ListGroup.Item
+            active={type.id === product.selectedType.id}
+            style={{ cursor: "pointer" }}
+            key={type.id}
+            onClick={() => product.setSelectedType(type)}
+            className="list-group-item  list-group-item-light"
+          >
+            {type.name}
+          </ListGroup.Item>
+        ))}
+      </ListGroup>
+    </>
   );
 });
 

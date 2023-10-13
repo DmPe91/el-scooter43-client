@@ -10,8 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 export const Review = observer(() => {
   const { user, product } = useContext(Context);
-  const [cause, setCause] = useState(" ");
-  const [description, setDescription] = useState(" ");
+  const [cause, setCause] = useState("");
+  const [description, setDescription] = useState("");
   let navigate = useNavigate();
   const click = async () => {
     await create_review(cause, description);

@@ -10,8 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 export const Login = observer(() => {
   const { user } = useContext(Context);
-  const [email, setEmail] = useState(" ");
-  const [password, setPassword] = useState(" ");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   let navigate = useNavigate();
   const click = async () => {
     let data, basket;
