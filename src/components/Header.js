@@ -76,14 +76,7 @@ const Header = observer(() => {
                     className="menu"
                     style={{ color: "#2F4F4F" }}
                   >
-                    Ремонт
-                  </Nav.Link>
-                  <Nav.Link
-                    href="/review"
-                    className="menu"
-                    style={{ color: "#2F4F4F" }}
-                  >
-                    Отзывы
+                    Заявка на ремонт
                   </Nav.Link>
                 </Nav>
               </Col>

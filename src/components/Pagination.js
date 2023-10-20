@@ -19,7 +19,7 @@ const Pages = observer(() => {
           key={page}
           active={product.page === page}
           onClick={() => product.setPage(page)}
-          class="btn btn-outline-dark"
+          class="btn btn-outline-dark m-1"
         >
           {page}
         </Pagination.Item>

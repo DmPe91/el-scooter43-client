@@ -31,7 +31,7 @@ export const createProduct = async (product) => {
   return data;
 };
 
-export const fetchProducts = async (typeId, conditionId, page, limit = 6) => {
+export const fetchProducts = async (typeId, conditionId, page, limit = 8) => {
   const { data } = await $host.get("api/product", {
     params: {
       typeId,

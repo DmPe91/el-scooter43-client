@@ -13,7 +13,7 @@ const Shop = observer(() => {
   useEffect(() => {
     fetchTypes().then((data) => product.setTypes(data));
     fetchCondition().then((data) => product.setCondition(data));
-    fetchProducts(null, null, 1, 3).then((data) => {
+    fetchProducts(null, null, 1, 8).then((data) => {
       product.setProduct(data.rows);
       product.setTotalCount(data.count);
     });
@@ -23,14 +23,14 @@ const Shop = observer(() => {
       product.selectedType.id,
       product.selectedCondition.id,
       product.page,
-      5
+      8
     ).then((data) => {
       product.setProduct(data.rows);
       product.setTotalCount(data.count);
     });
   }, [product.page, product.selectedType, product.selectedCondition]);
   return (
-    <Container>
+    <Container style={{ borderBottom: "3px solid #2F4F4F" }}>
       <Row className="mt-2">
         <Col md={3}>
           <TypeBar />
