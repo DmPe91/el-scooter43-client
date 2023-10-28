@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TypeBar from "./TypeBar";
 import ConditionBar from "./ConditionBar";
 import ProductList from "./ProductList";
@@ -7,16 +7,20 @@ import { Col, Container, Row } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { fetchTypes, fetchCondition, fetchProducts } from "../http/productAPI";
 import Pages from "./Pagination";
+import { Spinner } from "react-bootstrap";
 
 const Shop = observer(() => {
   const { product } = useContext(Context);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetchTypes().then((data) => product.setTypes(data));
     fetchCondition().then((data) => product.setCondition(data));
-    fetchProducts(null, null, 1, 8).then((data) => {
-      product.setProduct(data.rows);
-      product.setTotalCount(data.count);
-    });
+    fetchProducts(null, null, 1, 8)
+      .then((data) => {
+        product.setProduct(data.rows);
+        product.setTotalCount(data.count);
+      })
+      .finally(() => setLoading(false));
   }, []);
   useEffect(() => {
     fetchProducts(
@@ -29,6 +33,11 @@ const Shop = observer(() => {
       product.setTotalCount(data.count);
     });
   }, [product.page, product.selectedType, product.selectedCondition]);
+
+  if (loading) {
+    return <Spinner animation={"grow"} />;
+  }
+
   return (
     <Container style={{ borderBottom: "3px solid #2F4F4F" }}>
       <Row className="mt-2">
