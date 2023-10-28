@@ -8,7 +8,7 @@ const ConditionBar = observer(() => {
   const { product } = useContext(Context);
   return (
     <Row className="d-flex" style={{ flexWrap: "nowrap", width: "20%" }}>
-      {product.condition.map((condition) => (
+      {product.condition?.map((condition) => (
         <Card
           key={condition.id}
           className="p-2"

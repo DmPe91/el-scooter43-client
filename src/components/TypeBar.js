@@ -17,7 +17,7 @@ const TypeBar = observer(() => {
       
       }`}</style>
       <ListGroup>
-        {product.types.map((type) => (
+        {product.types?.map((type) => (
           <ListGroup.Item
             active={type.id === product.selectedType.id}
             style={{ cursor: "pointer" }}
