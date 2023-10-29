@@ -12,9 +12,15 @@ import { Spinner } from "react-bootstrap";
 const Shop = observer(() => {
   const { product } = useContext(Context);
   const [loading, setLoading] = useState(true);
+  const [loadType, setLoadType] = useState(true);
+  const [loadCondition, setLoadCondition] = useState(true);
   useEffect(() => {
-    fetchTypes().then((data) => product.setTypes(data));
-    fetchCondition().then((data) => product.setCondition(data));
+    fetchTypes()
+      .then((data) => product.setTypes(data))
+      .finally(setLoadType(false));
+    fetchCondition()
+      .then((data) => product.setCondition(data))
+      .finally(setLoadCondition(false));
     fetchProducts(null, null, 1, 8)
       .then((data) => {
         product.setProduct(data.rows);
@@ -22,19 +28,25 @@ const Shop = observer(() => {
       })
       .finally(setLoading(false));
   }, []);
-  /// useEffect(() => {
-  //// fetchProducts(
-  ////  product.selectedType.id,
-  /////  product.selectedCondition.id,
-  /////  product.page,
-  ////  8
-  ////).then((data) => {
-  //// product.setProduct(data.rows);
-  /// product.setTotalCount(data.count);
-  //// });
-  ////}, [product.page, product.selectedType, product.selectedCondition]);
+  useEffect(() => {
+    fetchProducts(
+      product.selectedType.id,
+      product.selectedCondition.id,
+      product.page,
+      8
+    ).then((data) => {
+      product.setProduct(data.rows);
+      product.setTotalCount(data.count);
+    });
+  }, [product.page, product.selectedType, product.selectedCondition]);
 
   if (loading) {
+    return <Spinner animation={"grow"} />;
+  }
+  if (loadType) {
+    return <Spinner animation={"grow"} />;
+  }
+  if (loadCondition) {
     return <Spinner animation={"grow"} />;
   }
 
