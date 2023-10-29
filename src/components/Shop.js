@@ -14,10 +14,6 @@ const Shop = observer(() => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchTypes().then((data) => product.setTypes(data));
-
-    fetchCondition().then((data) => product.setCondition(data));
-
     fetchProducts(null, null, 1, 8)
       .then((data) => {
         product.setProduct(data.rows);

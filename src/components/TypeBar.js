@@ -1,11 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
-
 import ListGroup from "react-bootstrap/ListGroup";
+import { Spinner } from "react-bootstrap";
+import { fetchTypes } from "../http/productAPI";
 
 const TypeBar = observer(() => {
   const { product } = useContext(Context);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchTypes()
+      .then((data) => product.setTypes(data))
+      .finally(setLoading(false));
+  }, []);
+
+  if (loading) {
+    return <Spinner animation={"grow"} />;
+  }
 
   return (
     <>
@@ -17,7 +29,7 @@ const TypeBar = observer(() => {
       
       }`}</style>
       <ListGroup>
-        {product.types?.map((type) => (
+        {product.types.map((type) => (
           <ListGroup.Item
             active={type.id === product.selectedType.id}
             style={{ cursor: "pointer" }}
