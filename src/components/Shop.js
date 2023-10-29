@@ -15,12 +15,13 @@ const Shop = observer(() => {
   useEffect(() => {
     fetchTypes().then((data) => product.setTypes(data));
     fetchCondition().then((data) => product.setCondition(data));
-    fetchProducts(null, null, 1, 8)
-      .then((data) => {
-        product.setProduct(data.rows);
-        product.setTotalCount(data.count);
-      })
-      .finally(() => setLoading(false));
+    fetchProducts(null, null, 1, 8).then((data) => {
+      product.setProduct(data.rows);
+      product.setTotalCount(data.count);
+    });
+    if (product.condition && product.type && product.product) {
+      setLoading(false);
+    }
   }, []);
   useEffect(() => {
     fetchProducts(
