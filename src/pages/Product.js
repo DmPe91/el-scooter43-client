@@ -32,7 +32,7 @@ export const Product = observer(() => {
           <Image
             width={300}
             height={300}
-            src={process.env.REACT_APP_API_URL + device.img}
+            src={"https://el-scooter-backend.onrender.com/" + device.img}
           />
         </Col>
         <Col md={4}>

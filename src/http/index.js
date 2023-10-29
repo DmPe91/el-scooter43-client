@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const $host = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: "https://el-scooter-backend.onrender.com",
 });
 
 const $authHost = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: "https://el-scooter-backend.onrender.com",
 });
 
 const authInterceptor = (config) => {
