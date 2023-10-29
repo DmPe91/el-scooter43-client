@@ -2,8 +2,26 @@ import { makeAutoObservable } from "mobx";
 
 export default class ProductStore {
   constructor() {
-    this._types = [];
-    this._condition = [];
+    this._types = [
+      {
+        id: 1,
+        name: "test",
+      },
+      {
+        id: 2,
+        name: "test",
+      },
+    ];
+    this._condition = [
+      {
+        id: 1,
+        name: "test",
+      },
+      {
+        id: 2,
+        name: "test",
+      },
+    ];
     this._product = [];
     this._selectedType = {};
     this._conditionType = {};
