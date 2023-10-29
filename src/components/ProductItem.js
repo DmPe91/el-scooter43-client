@@ -43,7 +43,7 @@ const ProductItem = observer(({ prod }) => {
         <Image
           width={150}
           height={150}
-          src={process.env.REACT_APP_API_URL + prod.img}
+          src={process.env.REACT_APP_API_URL + "/" + prod.img}
         />
         <div>{prod.name} </div>
         <div>{prod.price} рублей</div>
